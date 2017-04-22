@@ -1,0 +1,68 @@
+<h1>Basic Routing</h1>
+	
+<h2>You will define most of the routes for your application in the <b>app/Http/routes.php</b> file. 
+The most basic Laravel routes simply accept a URI and a Closure:</h2>
+<pre class="brush: php">
+	Route::get('/', function () {
+	    return 'Hello World';
+	});
+
+	Route::post('foo/bar', function () {
+	    return 'Hello World';
+	});
+
+	Route::put('foo/bar', function () {
+	    //
+	});
+
+	Route::delete('foo/bar', function () {
+	    //
+	});
+</pre>
+
+<h2>Registering A Route For Multiple Verbs</h2>
+<pre class="brush: php">
+	Route::match(['get', 'post'], '/', function () {
+	    return 'Hello World';
+	});
+</pre>
+
+<h2>Or, you may even register a route that responds to all HTTP verbs using the <b>any</b> method:</h2>
+<pre class="brush: php">
+	Route::any('foo', function () {
+	    return 'Hello World';
+	});
+</pre>
+
+<h2>Required Parameters</h2>
+<pre class="brush: php">
+	Route::get('user/{id}', function ($id) {
+	    return 'User '.$id;
+	});
+	Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
+	    //
+	});
+</pre>
+
+<h2>Regular Expression Constraints</h2>
+<pre class="brush: php">
+	Route::get('user/{name}', function ($name) {
+	    //
+	})
+	->where('name', '[A-Za-z]+');
+
+	Route::get('user/{id}', function ($id) {
+	    //
+	})
+	->where('id', '[0-9]+');
+</pre>
+
+<h2>Sub-Domain Routing</h2>
+<pre class="brush: php">
+	Route::group(['domain' => '{account}.myapp.com'], function () {
+	    Route::get('user/{id}', function ($account, $id) {
+	        //
+	    });
+	});
+</pre>
+

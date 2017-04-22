@@ -1,0 +1,134 @@
+<h2>Migrations are like <b>version control for your database</b>, allowing a team to easily modify and share the application's database schema.</h2>
+
+<h3>To create a migration, use the <b>make:migration</b></h3>
+
+<pre class="brush:bash">
+	php artisan make:migration create_users_table
+</pre>
+<h3>The --table and --create options may also be used to indicate the name of the table</h3>
+
+<pre class="brush:bash">
+	php artisan make:migration add_votes_to_users_table --table=users
+
+	php artisan make:migration create_users_table --create=users
+</pre>
+
+<h2>Migration Structure</h2>
+<pre class="brush:php">
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFlightsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('flights', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('airline');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('flights');
+    }
+}
+</pre>
+
+<h3>Running Migrations</h3>
+<pre class="brush:bash">
+	php artisan migrate
+</pre>	
+
+<h3>Rolling Back Migrations</h3>
+<h4>To rollback the latest migration "operation"</h4>
+<pre class="brush:bash">
+	php artisan migrate:rollback
+</pre>	
+
+<h4>To rollback all migrations </h4>
+<pre class="brush:bash">
+	php artisan migrate:reset
+</pre>	
+
+<h2>Writing Migrations </h2>
+
+<h3>Creating Tables</h3>
+<pre class="brush:php">
+	Schema::create('users', function (Blueprint $table) {
+	    $table->increments('id');
+	});
+</pre>	
+
+<h3>Checking For Table / Column Existence</h3>
+<pre class="brush:php">
+	if (Schema::hasTable('users')) {
+	    //
+	}
+
+	if (Schema::hasColumn('users', 'email')) {
+	    //
+	}
+</pre>	
+
+<h3>Renaming / Dropping Tables</h3>
+
+<pre class="brush:php">
+	Schema::rename($from, $to);
+</pre>	
+
+
+<pre class="brush:php">
+	Schema::drop('users');
+
+	Schema::dropIfExists('users');
+</pre>	
+
+<h3>Creating Columns</h3>
+<pre class="brush:php">
+Schema::table('users', function ($table) {
+    $table->string('email');
+});
+</pre>	
+
+<h3>Creating Indexes</h3>
+<pre class="brush:php">
+$table->string('email')->unique();
+</pre>	
+
+<h3>Alternatively, you may create the index after defining the column. For example:</h3>
+<pre class="brush:php">
+$table->unique('email');
+</pre>	
+
+<h2>Foreign Key Constraints</h2>
+
+<pre class="brush:php">
+Schema::table('posts', function ($table) {
+    $table->integer('user_id')->unsigned();
+
+    $table->foreign('user_id')->references('id')->on('users');
+});
+</pre>	
+<pre class="brush:php">
+$table->foreign('user_id')
+      ->references('id')->on('users')
+      ->onDelete('cascade');
+</pre>	
+
+<h3>To drop a foreign key, you may use the <b>dropForeign</b> method.</h3>
+<pre class="brush:php">
+$table->dropForeign(['user_id']);
+</pre>	

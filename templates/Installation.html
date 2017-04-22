@@ -1,0 +1,28 @@
+<p style="font-size: 250%;">
+	
+		Laravel utilizes <b>Composer</b> to manage its dependencies. So, before using Laravel, make sure you have Composer installed on your machine.
+	
+</p>
+
+<pre class="brush: shell">
+	composer create-project laravel/laravel blog "5.1.*"
+</pre>
+<img src="images/cmd_install.bmp">
+
+<hr>
+
+<h3>Basic Configuration</h3>
+
+<ul style="font-size: 150%;">
+	<li>
+		All of the configuration files for the Laravel framework are stored in the config directory. Each option is well documented.
+	</li>
+	<li>
+		After installing Laravel, you may need to configure some permissions. Directories within the  <b>storage</b> and the <b>bootstrap/cache</b> directories should be writable by your web server.
+	</li>
+	<li>You may also want to configure a few additional components of Laravel, such as:<b>Cache</b>,<b>Database</b>,<b>Session</b></li>
+	<li>The framework ships with a <b>public/.htaccess</b> file that is used to allow URLs without index.php. If you use Apache to serve your Laravel application, be sure to enable the <b>mod_rewrite</b> module.</li>
+	<li>
+		In a fresh Laravel installation, the root directory of your application will contain a <b>.env.example</b> file. If you install Laravel via Composer, this file will automatically be renamed to <b>.env</b>. Otherwise, you should rename the file manually.
+	</li>
+</ul>

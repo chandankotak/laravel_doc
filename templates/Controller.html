@@ -1,0 +1,27 @@
+<h2>Basic Controllers</h2>
+
+<pre class="brush:php">
+	namespace App\Http\Controllers;
+
+	use App\User;
+	use App\Http\Controllers\Controller;
+
+	class UserController extends Controller
+	{
+	    /**
+	     * Show the profile for the given user.
+	     *
+	     * @param  int  $id
+	     * @return Response
+	     */
+	    public function showProfile($id)
+	    {
+	        return view('user.profile', ['user' => User::findOrFail($id)]);
+	    }
+	}
+</pre>
+
+<h3>We can route to the controller action like so:</h3>
+<pre class="brush:php">
+	Route::get('user/{id}', 'UserController@showProfile');
+</pre>

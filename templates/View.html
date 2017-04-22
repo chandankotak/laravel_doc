@@ -1,0 +1,28 @@
+<h2>Views are stored in the <b>resources/views</b> directory.</h2>
+
+<pre class="brush:php">
+	<!-- View stored in resources/views/greeting.php -->
+
+	<html>
+	    <body>
+	        <h1>Hello, <?php echo $name; ?></h1>
+	    </body>
+	</html>
+</pre>
+
+<h2>Since this view is stored at resources/views/greeting.php, we may return it using the global view helper function like so:</h2>
+
+
+<pre class="brush:php">
+Route::get('/', function ()    {
+    return view('greeting', ['name' => 'James']);
+});
+</pre>
+
+<h2> Views may also be nested within sub-directories of the resources/views directory. "Dot" notation may be used to reference nested views. For example</h2>
+
+
+<pre class="brush:php">
+<!-- if your view is stored at  resources/views/admin/profile.php:-->
+return view('admin.profile', $data);
+</pre>

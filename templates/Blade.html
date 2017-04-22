@@ -1,0 +1,137 @@
+<h2>Blade is the simple, yet powerful templating engine provided with Laravel.</h2>
+
+<h3>Blade view files use the <b>.blade.php</b> file extension and are typically stored in the <b>resources/views</b> directory.</h3>
+
+<h2><b>Template Inheritance</b></h2>
+
+<h2>Defining A Layout</h2>
+
+<pre class="brush:php">
+<!-- Stored in resources/views/layouts/master.blade.php -->
+
+<html>
+    <head>
+        <title>App Name - @yield('title')</title>
+    </head>
+    <body>
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
+</html>
+</pre>
+
+
+<h2>Extending A Layout</h2>
+
+<pre class="brush:php">
+<!-- Stored in resources/views/child.blade.php -->
+
+@extends('layouts.master')
+
+@section('title', 'Page Title')
+
+@section('sidebar')
+    @parent
+
+    <p>This is appended to the master sidebar.</p>
+@endsection
+
+@section('content')
+    <p>This is my body content.</p>
+@endsection
+</pre>
+
+<h2> just like plain PHP views, Blade views may be returned from routes using the global view helper function:</h2>
+
+<pre class="brush:php">
+Route::get('blade', function () {
+    return view('child');
+});
+</pre>
+
+
+<h2>Displaying Data</h2>
+
+<pre class="brush:php">
+Route::get('greeting', function () {
+    return view('welcome', ['name' => 'Samantha']);
+});
+</pre>
+
+
+<pre class="brush:php">
+Hello, { { $name }}.
+</pre>
+
+
+<h2><b>Blade &amp; JavaScript Frameworks</b></h2>
+
+<h2>Since many JavaScript frameworks also use "curly" braces to indicate a given expression should be displayed in the browser, you may use the @ symbol to inform the Blade rendering engine an expression should remain untouched. For example:</h2>
+
+
+
+<pre class="brush:php">
+<h1>Laravel</h1>
+
+Hello, @{ { name }}.
+</pre>
+
+
+
+<h2>If Statements</h2>
+<pre class="brush:php">
+@if (count($records) === 1)
+    I have one record!
+@elseif (count($records) > 1)
+    I have multiple records!
+@else
+    I don't have any records!
+@endif
+</pre>
+
+<h2>Loops</h2>
+<pre class="brush:php">
+@for ($i = 0; $i < 10; $i++)
+    The current value is {{ $i }}
+@endfor
+
+@foreach ($users as $user)
+    <p>This is user {{ $user->id }}</p>
+@endforeach
+
+@forelse ($users as $user)
+    <li>{{ $user->name }}</li>
+@empty
+    <p>No users</p>
+@endforelse
+
+@while (true)
+    <p>I'm looping forever.</p>
+@endwhile
+</pre>
+
+<h2>Including Sub-Views</h2>
+<pre class="brush:php">
+<div>
+    @include('shared.errors')
+
+    <form>
+        <!-- Form Contents -->
+    </form>
+</div>
+</pre>
+<pre class="brush:php">
+@include('view.name', ['some' => 'data'])
+</pre>
+
+
+<h2>Comments</h2>
+<pre class="brush:php">
+{{-- This comment will not be present in the rendered HTML --}}
+</pre>
+

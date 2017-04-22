@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <title>Laravel | {{title}}</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/simple-sidebar.css">
+
+    <!-- Include required JS files -->
+    <script type="text/javascript" src="assets/syntxhl/shCore.js"></script>
+     
+    <!--
+        At least one brush, here we choose JS. You need to include a brush for every
+        language you want to highlight
+    -->
+    <script type="text/javascript" src="assets/syntxhl/shBrushPlain.js"></script>
+    <script type="text/javascript" src="assets/syntxhl/shBrushPowerShell.js"></script>
+    <script type="text/javascript" src="assets/syntxhl/shBrushBash.js"></script>
+    <script type="text/javascript" src="assets/syntxhl/shBrushJScript.js"></script>
+    <script type="text/javascript" src="assets/syntxhl/shBrushSql.js"></script>
+    <script type="text/javascript" src="assets/syntxhl/shBrushPhp.js"></script>
+     
+    <!-- Include *at least* the core style and default theme -->
+    <link href="assets/syntxhl/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="assets/syntxhl/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+
+
+</head>
+
+<body >
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" style="padding: 1%;">
+            <div class="list-group" >
+                    <a class="list-group-item complete" active-link="active" href="#/Introduction">Introduction</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Popularity">Popularity</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Installation">Installation</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Routing">Routing</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Controller">Controller</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Artisan">Artisan</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Database">Database</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Migrations">Migrations</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Model">Model <span class="badge">+ Eloquent ORM</span></a>
+                    <a class="list-group-item complete" active-link="active" href="#/View">View</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Blade">Blade</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Releases">Releases</a>
+                    <!-- <a class="list-group-item" active-link="active" href="#/Validation">Validation</a> -->
+                    <a class="list-group-item complete" active-link="active" href="#/CSRF">CSRF</a>
+                    <a class="list-group-item complete" active-link="active" href="#/Conclusion">Conclusion</a>
+                </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <h1 class='text-center' ng-click="highlight_all()"><span class="label label-default">{{title}}</span></h1>
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script>
+        /*Menu Toggle Script*/
+        setTimeout(function(){$("#wrapper").toggleClass("toggled");},100);
+    </script>
+    
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/angular-route.js"></script>
+    <script src="assets/js/angular-app.js"></script>
+</body>
+
+</html>

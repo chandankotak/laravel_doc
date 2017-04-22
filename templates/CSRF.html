@@ -1,0 +1,52 @@
+<h2>Cross-Site Request Forgeries</h2>
+	
+<h3>Cross-site request forgeries are a type of malicious exploit whereby unauthorized commands are performed on behalf of the authenticated user.</h3>
+
+<h2>Laravel automatically generates a CSRF "token" for each active user session managed by the application. To generate a hidden input field _token containing the CSRF token, you may use the csrf_field helper function:</h2>
+
+<pre class="brush:php">echo csrf_field();</pre>
+
+<h3>The <b>csrf_field</b> helper function generates the following HTML:</h3>
+<pre class="brush:php">
+	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">	
+</pre>
+
+<h2>Of course, using the Blade templating engine:</h2>
+
+<pre class="brush:php">
+	{{ csrf_field() } }
+</pre>
+
+
+<h2>Excluding URIs From CSRF Protection</h2>
+
+<pre class="brush:php">
+	namespace App\Http\Middleware;
+
+	use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
+
+	class VerifyCsrfToken extends BaseVerifier
+	{
+	    /**
+	     * The URIs that should be excluded from CSRF verification.
+	     *
+	     * @var array
+	     */
+	    protected $except = [
+	        'stripe/*',
+	    ];
+	}
+</pre>
+
+<h2>Once you have created the meta tag, you can instruct a library like jQuery to add the token to all request headers.</h2>
+
+<pre class="brush:php">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+</pre>
+<pre class="brush:js">
+	$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	});
+</pre>
